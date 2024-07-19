@@ -14,5 +14,6 @@ IRCC Application Documents Download Assistant.
 
 ```bash
 $ npm install
+$ npm run updep
 $ npm run build
 ```

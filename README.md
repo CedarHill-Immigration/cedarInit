@@ -6,12 +6,11 @@ IRCC Application Documents Download Assistant.
 ### Environment
 
 - Node.js
-
 - jq
-```bash
-$ brew install jq # macOS
-$ sudo apt-get install jq # Debian/Ubuntu...
-```
+    ```bash
+    $ brew install jq # macOS
+    $ sudo apt-get install jq # Debian/Ubuntu...
+    ```
 
 ### Build
 

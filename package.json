@@ -1,6 +1,6 @@
 {
   "name": "cedar-init",
-  "version": "1.5.0",
+  "version": "1992.1.1",
   "description": "",
   "main": "main.mjs",
   "bin": "main.mjs",
@@ -12,6 +12,7 @@
     "start": "node --no-deprecation main.mjs",
     "test": "rm -rf test/submit && npm start test/index.html",
     "updep": "npx ncu -u && npm install && npm run pub_uti && ( git commit -am 'update dependencies' || true )",
+    "build": "sh ./build.sh",
     "prepublishOnly": "echo DANGEROUS! DO NOT publish this package! && false",
     "pub_uti": "cp ./node_modules/utilitas/dist/utilitas.lite.mjs ./CedarInit/"
   },

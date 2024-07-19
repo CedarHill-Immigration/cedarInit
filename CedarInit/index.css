@@ -1,0 +1,136 @@
+#CedarInit {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px;
+    left: 50%;
+    bottom: -640px;
+    width: 1020px;
+    position: fixed;
+    transform: translateX(-50%);
+}
+
+#popupMain {
+    background: #121212;
+    background-image: url('title_image_3.jpg');
+    background-repeat: no-repeat;
+    background-size: auto 560px;
+    background-position: center left;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 10px;
+    width: 330px;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.logo_area {
+    padding: 10px;
+    size: auto;
+}
+
+#logo {
+    width: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
+}
+
+.config {
+    padding: 10px;
+    padding-right: 15px;
+}
+
+#folders {
+    display: block;
+    resize: none;
+    width: calc(100% - 20px);
+    height: 100px;
+}
+
+.feature_title {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#links {
+    display: block;
+    margin: 20px;
+    text-align: center;
+}
+
+.fields {
+    padding: 5px;
+    border: 1px solid #3168f4;
+    border-radius: 5px;
+}
+
+#logs {
+    width: 1005px;
+    height: 600px;
+    padding: 5px;
+    overflow: scroll;
+}
+
+#title {
+    padding: 5px 0px 5px 0px;
+    margin-bottom: 10px;
+    display: block;
+    height: 20px;
+    line-height: 16px;
+    float: left;
+}
+
+#title>img {
+    height: 27px;
+    margin-top: -4px;
+    border-radius: 3px;
+}
+
+.button {
+    padding: 5px 0px 5px 0px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    min-height: 20px;
+    min-width: 100px;
+    float: right;
+}
+
+button {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #3168f4;
+    font-size: 14px;
+    color: #000;
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+textarea {
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #3168f4;
+    font-size: 14px;
+    color: #000;
+    opacity: 0.7;
+    padding: 10px;
+}
+
+.file_button {
+    padding: 5px 0px 5px 0px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    min-height: 20px;
+    min-width: 100px;
+}

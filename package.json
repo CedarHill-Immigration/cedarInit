@@ -1,0 +1,24 @@
+{
+  "name": "cedar-init",
+  "version": "1.5.0",
+  "description": "",
+  "main": "main.mjs",
+  "bin": "main.mjs",
+  "type": "module",
+  "engines": {
+    "node": ">=17.x"
+  },
+  "scripts": {
+    "start": "node --no-deprecation main.mjs",
+    "test": "rm -rf test/submit && npm start test/index.html",
+    "updep": "npx ncu -u && npm install && npm run pub_uti && ( git commit -am 'update dependencies' || true )",
+    "prepublishOnly": "echo DANGEROUS! DO NOT publish this package! && false",
+    "pub_uti": "cp ./node_modules/utilitas/dist/utilitas.lite.mjs ./CedarInit/"
+  },
+  "author": "Leask Wong<i@leaskh.com>",
+  "license": "MIT",
+  "dependencies": {
+    "node-html-parser": "^6.1.13",
+    "utilitas": "^1996.1.19"
+  }
+}

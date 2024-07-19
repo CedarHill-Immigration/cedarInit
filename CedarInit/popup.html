@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>CedarInit</title>
+    <!-- Basic Libs -->
+    <script src="jquery.min.js"></script>
+    <script src="utilitas.lite.mjs"></script>
+    <link rel="stylesheet" href="normalize.css" />
+    <!-- App Libs -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="popupMain">
+        <div class="logo_area glass">
+            <img id="logo" src="logo_horizon.png">
+            <span id="links">
+                <a href="https://www.cedarhill.io/" target="_blank">CedarHill</a> |
+                <a href="https://www.youtube.com/@DecisionMade" target="_blank">YouTube</a> |
+                <a href="https://github.com/Leask/cedarInit" target="_blank">GitHub</a>
+            </span>
+        </div>
+        <br>
+        <div class="config glass">
+            <div>
+                <span class="feature_title">
+                    Alternative to "IMM5476.pdf"
+                </span>
+                <br>
+                <br>
+                <span>
+                    Please set up a file to replace IMM5476.pdf.
+                </span>
+                <br>
+                <br>
+                <button id="file_IMM5476" class="file_button">Set</button>
+            </div>
+        </div>
+        <br>
+        <div class="config glass">
+            <div>
+                <span class="feature_title">
+                    Custom folders
+                </span>
+                <br>
+                <br>
+                <span>
+                    Please list the folders that need to be created automatically,
+                    with each folder on a separate line.
+                </span>
+                <br>
+                <br>
+                <textarea id="folders"></textarea>
+                <br>
+                <button id="folders_set" class="file_button">Save</button>
+                </span>
+            </div>
+        </div>
+        <script src="popup.mjs"></script>
+</body>
+
+</html>

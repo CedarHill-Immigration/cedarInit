@@ -1,0 +1,15 @@
+.github
+.history
+archived
+debug
+debug.js
+Dockerfile
+etc
+gears
+package-lock.json
+submit
+template.md
+test
+test.mjs
+webpack.config.js
+wiki

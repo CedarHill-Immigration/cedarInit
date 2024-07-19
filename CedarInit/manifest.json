@@ -1,0 +1,36 @@
+{
+    "name": "CedarInit",
+    "description": "CedarInit Chrome Extension",
+    "version": "1991.1.0",
+    "manifest_version": 3,
+    "icons": {
+        "500": "icon.png"
+    },
+    "background": {
+        "service_worker": "background.mjs"
+    },
+    "permissions": [
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "content_scripts": [
+        {
+            "matches": [
+                "https://*.cic.gc.ca/*",
+                "file:///*/cedarInit/*"
+            ],
+            "css": [
+                "index.css"
+            ],
+            "js": [
+                "jquery.min.js",
+                "utilitas.lite.mjs",
+                "content_scripts.mjs"
+            ]
+        }
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    }
+}

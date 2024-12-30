@@ -2,7 +2,7 @@ const [modName, silent, BASE64] = ['CedarInit', false, 'base64'];
 const getUrl = dom => dom.querySelector('a')?.href;
 const basename = name => name.replace(/^.*\/([^\/]*)$/, '$1');
 const defFetchOpt = { redirect: 'follow', follow: 5, timeout: 1000 * 10 };
-const fetchService = 'https://fetcher.i-cdf.workers.dev/?token=04b2bfba4b4c8dd0bcc7219e09d006ed&url=';
+const fetchService = 'https://smart.cedarhill.site/api/fetch?token=04b2bfba4b4c8dd0bcc7219e09d006ed&url=';
 const logError = error => log(`⚠️ ERROR: ${error.message}`);
 const get = async key => (await chrome.storage.local.get(key))?.[key] || '';
 
@@ -101,7 +101,7 @@ const parser = async (rootDom = document) => {
             });
         });
     });
-    console.table(output)
+    console.table(output);
     output.map(p => log(JSON.stringify(p), true));
     log(`Got ${names.length} people, ${intPkg} packages, ${count} documents.`);
     return { packages: people, output };

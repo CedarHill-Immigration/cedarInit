@@ -1,7 +1,7 @@
 {
     "name": "CedarInit",
     "description": "CedarInit Chrome Extension",
-    "version": "1992.1.1",
+    "version": "1993.1.1",
     "manifest_version": 3,
     "icons": {
         "500": "icon.png"

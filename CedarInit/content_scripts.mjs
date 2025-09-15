@@ -107,6 +107,30 @@ const parser = async (rootDom = document) => {
     return { packages: people, output };
 };
 
+const fetchs = async (url, options = {}, retries = 3, delay = 3000) => {
+    for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+            const res = await fetch(url, options);
+            if (!res.ok) {
+                if (attempt < retries) {
+                    console.warn(`Attempt ${attempt} failed with status ${res.status}. Retrying in ${delay}ms...`);
+                    await new Promise(r => setTimeout(r, delay));
+                    continue;
+                }
+                throw new Error(`Fetch failed after ${retries} attempts, last status: ${res.status}`);
+            }
+            return res;
+        } catch (err) {
+            if (attempt < retries) {
+                console.warn(`Attempt ${attempt} failed: ${err}. Retrying in ${delay}ms...`);
+                await new Promise(r => setTimeout(r, delay));
+            } else {
+                throw err;
+            }
+        }
+    }
+};
+
 const build = async ({ packages: docList, output }) => {
     const root = await window.showDirectoryPicker();
     const [curItems, jobs] = [[], []];
@@ -144,7 +168,7 @@ const build = async ({ packages: docList, output }) => {
                                 await writable.close();
                                 log(`${msgPad}Fulfill via alternative: ${item.url}`);
                             } else {
-                                let fRes = await fetch(`${fetchService}${encodeURIComponent(item.url)}`, defFetchOpt);
+                                let fRes = await fetchs(`${fetchService}${encodeURIComponent(item.url)}`, defFetchOpt);
                                 let href = '';
                                 if (fRes.headers.get('content-type').includes('text/html')) {
                                     const subHtml = await fRes.text();
@@ -155,7 +179,7 @@ const build = async ({ packages: docList, output }) => {
                                         if (href.startsWith('/')) {
                                             href = `https://www.canada.ca${href}`;
                                         }
-                                        fRes = await fetch(`${fetchService}${encodeURIComponent(href)}`, defFetchOpt);
+                                        fRes = await fetchs(`${fetchService}${encodeURIComponent(href)}`, defFetchOpt);
                                     } else {
                                         log(`${msgPad}Error: No PDF link found.`);
                                     }

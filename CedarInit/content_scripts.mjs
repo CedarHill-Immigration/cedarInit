@@ -8,6 +8,7 @@ const get = async key => (await chrome.storage.local.get(key))?.[key] || '';
 
 const catchTitles = new Set([
     'Your document checklist - Immigration, Refugees and Citizenship Canada',
+    'Upload your documents - Immigration, Refugees and Citizenship Canada',
 ]);
 
 const tableIds = [
@@ -66,28 +67,56 @@ const parser = async (rootDom = document) => {
     tableIds.map(id => {
         tableDom.push(...rootDom.querySelectorAll(`table#${id}`));
     });
+    if (!tableDom.length) {
+        tableDom.push(...rootDom.querySelectorAll('table.eapp-app-checklist-table'));
+    }
     const people = {};
     let count = 0;
     for (let item of tableDom) {
         const caption = item.querySelector('caption');
-        const [type, name, trs, documents] = [
-            caption.childNodes[0].textContent.trim(),
-            caption.childNodes[2].textContent.trim(),
-            item.querySelectorAll('tbody tr'), [],
-        ];
+        const trs = item.querySelectorAll('tbody tr');
+        const documents = [];
+        let docNameIndex = 1;
+        let type = '';
+        let person = '';
+        if (caption) {
+            const lines = Array.from(caption.childNodes || [])
+                .map(node => node.textContent?.trim())
+                .filter(Boolean);
+            type = lines[0] || 'Application Form(s)';
+            person = lines[1] || 'Applicant';
+        } else {
+            docNameIndex = 0;
+            const heading = item.closest('.table-responsive')?.querySelector('h2.eapp-app-checklist-header')
+                || rootDom.querySelector('h2.eapp-app-checklist-header');
+            const headerText = heading ? cleanText(heading) : '';
+            if (headerText.includes(':')) {
+                const [first, ...rest] = headerText.split(':');
+                person = first.trim();
+                type = rest.join(':').trim();
+            } else {
+                type = headerText.trim();
+            }
+            if (!person) { person = type || 'Applicant'; }
+            if (!type) { type = 'Application Checklist'; }
+        }
         for (let tr of trs) {
             const tds = tr.querySelectorAll('td');
-            const name = cleanText(tds[1]);
+            const target = tds[docNameIndex];
+            if (!target) { continue; }
+            const docTitle = cleanText(target);
+            if (!docTitle) { continue; }
             const doc = {
-                name: name.replace(/ *\(required\)$/, ''),
-                url: getUrl(tds[1]),
-                required: name.includes('(required)'),
+                name: docTitle.replace(/ *\(required\)$/, ''),
+                url: getUrl(target),
+                required: docTitle.includes('(required)'),
                 // instructions: cleanText(tds[2]),
             };
             documents.push(doc);
         }
-        people[name] = people[name] || [];
-        getPackage(people[name], type)[type] = documents;
+        if (!documents.length) { continue; }
+        people[person] = people[person] || [];
+        getPackage(people[person], type)[type] = documents;
         count += documents.length;
     }
     let [names, output, intPkg] = [Object.keys(people), [], 0];

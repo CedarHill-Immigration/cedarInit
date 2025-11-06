@@ -1,7 +1,8 @@
 #!/bin/bash
 
 PACKAGE_JSON="package.json"
-MANIFEST_JSON="cedarInit/manifest.json"
+SOURCE_DIR="CedarInit"
+MANIFEST_JSON="$SOURCE_DIR/manifest.json"
 VERSION=$(jq -r '.version' "$PACKAGE_JSON")
 
 if [ -z "$VERSION" ]; then
@@ -29,7 +30,7 @@ rm -f "$OUTPUT_FILE"
 rm -f "$ZIP_FILE"
 
 if (
-  cd cedarInit && \
+  cd "$SOURCE_DIR" && \
   zip -qr "../$OUTPUT_FILE" ./*
 ); then
   echo "Package created at $OUTPUT_FILE"

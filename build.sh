@@ -22,15 +22,23 @@ fi
 
 OUTPUT_DIR="bin"
 OUTPUT_FILE="$OUTPUT_DIR/CedarInit_${VERSION}.crx"
+ZIP_FILE="$OUTPUT_DIR/CedarInit_${VERSION}.zip"
 
 mkdir -p "$OUTPUT_DIR"
 rm -f "$OUTPUT_FILE"
+rm -f "$ZIP_FILE"
 
 if (
   cd cedarInit && \
   zip -qr "../$OUTPUT_FILE" ./*
 ); then
   echo "Package created at $OUTPUT_FILE"
+  if cp "$OUTPUT_FILE" "$ZIP_FILE"; then
+    echo "Zip copy created at $ZIP_FILE"
+  else
+    echo "Error: Failed to copy package to $ZIP_FILE"
+    exit 1
+  fi
 else
   echo "Error: Failed to create package at $OUTPUT_FILE"
   exit 1

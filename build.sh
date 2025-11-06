@@ -19,3 +19,19 @@ else
   echo "Error: Failed to update version in $MANIFEST_JSON"
   exit 1
 fi
+
+OUTPUT_DIR="bin"
+OUTPUT_FILE="$OUTPUT_DIR/CedarInit_${VERSION}.crx"
+
+mkdir -p "$OUTPUT_DIR"
+rm -f "$OUTPUT_FILE"
+
+if (
+  cd cedarInit && \
+  zip -qr "../$OUTPUT_FILE" ./*
+); then
+  echo "Package created at $OUTPUT_FILE"
+else
+  echo "Error: Failed to create package at $OUTPUT_FILE"
+  exit 1
+fi

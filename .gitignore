@@ -117,3 +117,7 @@ debug.mjs
 debug
 submit
 main-*
+
+# Build artifacts
+/bin/*
+!/bin/.touch
